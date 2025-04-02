@@ -1,4 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu toggle
+    const setupMobileMenu = () => {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-menu a');
+        const headerBar = document.querySelector('.header-bar');
+        
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                document.body.classList.toggle('no-scroll');
+            });
+            
+            // Close menu when a link is clicked and scroll to section
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    hamburger.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    document.body.classList.remove('no-scroll');
+                    
+                    // Smooth scroll to target section
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        let offset = 20; // Default offset for mobile
+                        
+                        // Special offset for CTA section
+                        if (targetId === '#cta-section') {
+                            offset = 40;
+                        }
+                        
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: targetId === '#top' ? 0 : targetElement.offsetTop - offset,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Update URL without causing a page jump
+                            history.pushState(null, null, targetId);
+                        }, 300); // Small delay to ensure menu is closed first
+                    }
+                });
+            });
+        }
+        
+        // Handle header bar opacity on scroll
+        if (headerBar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    headerBar.style.opacity = '1';
+                } else {
+                    headerBar.style.opacity = '0.8';
+                }
+            });
+        }
+    };
+    
     // Mobile navigation toggle
     const setupMobileNav = () => {
         if (window.innerWidth <= 768) {
@@ -249,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     // Initialize
+    setupMobileMenu();
     setupMobileNav();
     addMobileStyles();
     setupSmoothScroll();

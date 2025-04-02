@@ -69,21 +69,29 @@ a {
     padding-top: 0; /* Remove padding as we adjusted the sidebar padding */
 }
 
+/* Base styles for all links */
 .sidebar-nav a {
     font-size: 16px;
-    color: var(--text-color);
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
+    color: rgba(0, 0, 0, 0.5); /* text-neutral-500 equivalent */
+    transition: color 0.15s ease; /* transition-colors duration-150 equivalent */
+    text-decoration: none;
 }
 
+/* Hover state for all links */
 .sidebar-nav a:hover {
-    opacity: 0.9;
+    color: rgba(0, 0, 0, 0.7); /* text-neutral-700 equivalent */
 }
 
-/* Active link in sidebar - only for Avenra which is set in HTML */
-.sidebar-nav a.active {
-    opacity: 1;
-    font-weight: 500;
+/* Special styling for Avenra link */
+.sidebar-nav a.logo {
+    font-weight: 700; /* font-bold equivalent */
+    color: rgba(0, 0, 0, 0.7); /* text-neutral-700 equivalent */
+}
+
+/* Active state for section links */
+.sidebar-nav a.active:not(.logo) {
+    color: rgba(0, 0, 0, 0.9); /* text-neutral-900 equivalent */
+    font-weight: 500; /* font-medium equivalent */
 }
 
 /* Main content */
@@ -100,7 +108,7 @@ a {
 
 /* Hero section */
 .hero {
-    padding: 100px 0 10px; /* Reduced bottom padding */
+    padding: 100px 0 40px; /* Increased bottom padding to match spacing with divider */
     width: 100%;
 }
 
@@ -118,7 +126,7 @@ a {
 
 .hero-description p {
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     line-height: 1.4;
 }
 
@@ -348,7 +356,8 @@ a {
     
     .hero-description p {
         font-size: 18px;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
+        line-height: 1.4;
     }
     
     .feature {
@@ -357,12 +366,12 @@ a {
     
     .feature-number {
         font-size: 18px;
-        margin-bottom: 12px;
+        margin-bottom: 16px;
     }
     
     .feature h2 {
         font-size: 28px;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
     
     .feature p {
@@ -445,8 +454,8 @@ a {
     
     .manifesto-text p {
         font-size: 16px;
-        line-height: 1.7;
-        margin-bottom: 18px;
+        line-height: 1.5;
+        margin-bottom: 20px;
     }
     
     .values-grid {
@@ -468,35 +477,48 @@ a {
     }
     
     .cta-section {
-        margin: 50px 0 40px;
-        padding: 30px 0;
+        margin: 40px 0;
+        padding: 40px 0;
     }
     
     .cta-content h2 {
-        font-size: 26px;
-        margin-bottom: 20px;
+        font-size: 28px;
+        margin-bottom: 24px;
     }
     
     .cta-content p {
-        font-size: 16px;
-        margin-bottom: 30px;
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 10px 14px;
+        font-size: 15px;
+    }
+    
+    .contact-form .btn-primary {
+        width: 100%;
+    }
+    
+    .contact-alternative {
+        margin-top: 32px;
+        padding-top: 20px;
     }
     
     .cta-buttons {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
-    }
-    
-    .btn-primary {
-        padding: 10px 24px;
-        font-size: 15px;
-        width: 100%;
-        text-align: center;
-    }
-    
-    .btn-secondary {
-        font-size: 15px;
+        gap: 20px;
     }
 }
 
@@ -511,6 +533,7 @@ a {
 .capabilities-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 1px;
     margin: 0 0 40px;
     border: 1px solid rgba(0, 0, 0, 0.08);
@@ -789,11 +812,9 @@ a {
 
 /* CTA Section */
 .cta-section {
-    margin: 100px 0 60px;
+    margin: 40px 0;
     padding: 60px 0;
     background-color: transparent;
-    border-top: 1px solid rgba(0, 0, 0, 0.03);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .cta-content {
@@ -804,7 +825,7 @@ a {
     font-size: 36px;
     font-weight: 600;
     line-height: 1.3;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     letter-spacing: -0.02em;
 }
 
@@ -812,7 +833,65 @@ a {
     font-size: 20px;
     line-height: 1.5;
     color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+}
+
+/* Contact Form */
+.contact-form {
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.contact-form .btn-primary {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.contact-alternative {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.contact-alternative p {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .cta-buttons {
@@ -851,7 +930,7 @@ a {
 
 @media (max-width: 768px) {
     .cta-section {
-        margin: 60px 0 40px;
+        margin: 40px 0;
         padding: 40px 0;
     }
     
@@ -862,7 +941,38 @@ a {
     
     .cta-content p {
         font-size: 18px;
-        margin-bottom: 36px;
+        margin-bottom: 32px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 10px 14px;
+        font-size: 15px;
+    }
+    
+    .contact-form .btn-primary {
+        width: 100%;
+        padding: 10px 24px;
+        font-size: 15px;
+        text-align: center;
+    }
+    
+    .contact-alternative {
+        margin-top: 32px;
+        padding-top: 20px;
+    }
+    
+    .btn-secondary {
+        font-size: 15px;
     }
     
     .cta-buttons {
@@ -874,7 +984,7 @@ a {
 
 /* Who We Are - Manifesto Layout */
 .who-we-are {
-    padding-bottom: 60px;
+    /* Removing extra padding to match other feature sections */
 }
 
 .manifesto-layout {
@@ -886,7 +996,7 @@ a {
 
 .manifesto-text p {
     font-size: 18px;
-    line-height: 1.8; /* Increase line height for better readability */
+    line-height: 1.5; /* Updated to match feature p line-height */
     margin-bottom: 24px;
 }
 

@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(style);
     };
     
-    // Simple smooth scroll without changing active states
+    // Simple smooth scroll with special handling for CTA section
     const setupSmoothScroll = () => {
         const navLinks = document.querySelectorAll('.sidebar-nav a');
         
@@ -121,8 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
+                    let offset = 65; // Default offset
+                    
+                    // Special offset for CTA section
+                    if (targetId === '#cta-section') {
+                        offset = 85; // Increase this value to scroll lower
+                    }
+                    
                     window.scrollTo({
-                        top: targetId === '#top' ? 0 : targetElement.offsetTop - 70,
+                        top: targetId === '#top' ? 0 : targetElement.offsetTop - offset,
                         behavior: 'smooth'
                     });
                     
@@ -133,8 +140,118 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
+    // Set up Intersection Observer for detecting active sections
+    const setupActiveNavigation = () => {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.sidebar-nav a:not(.logo)');
+        
+        const options = {
+            rootMargin: '-10% 0px -85% 0px', // Consider a section in view when it's 10% from the top and 85% from the bottom
+            threshold: 0
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Get the id of the current section
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // Add active class to the corresponding link
+                    const correspondingLink = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('active');
+                    }
+                }
+            });
+        }, options);
+        
+        // Observe all sections
+        sections.forEach(section => {
+            if (section.id) {
+                observer.observe(section);
+            }
+        });
+        
+        // Also observe the top section
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            observer.observe(heroSection);
+        }
+    };
+    
+    // Handle contact form submission
+    const setupContactForm = () => {
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = this.querySelector('#name').value;
+                const email = this.querySelector('#email').value;
+                const project = this.querySelector('#project').value;
+                
+                // In a real application, you would send this data to a server
+                // For now, we'll just show a success message
+                
+                // Create success message
+                const successMessage = document.createElement('div');
+                successMessage.classList.add('form-success');
+                successMessage.innerHTML = `
+                    <h3>Thanks for reaching out, ${name}!</h3>
+                    <p>We've received your message and will get back to you at ${email} shortly.</p>
+                `;
+                
+                // Replace form with success message
+                this.style.opacity = '0';
+                setTimeout(() => {
+                    this.style.display = 'none';
+                    this.parentNode.insertBefore(successMessage, this.nextSibling);
+                    
+                    // Add success message styles
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .form-success {
+                            padding: 30px;
+                            background-color: rgba(0, 0, 0, 0.03);
+                            border-radius: 4px;
+                            margin-bottom: 40px;
+                            animation: fadeIn 0.5s ease forwards;
+                        }
+                        
+                        .form-success h3 {
+                            font-size: 20px;
+                            font-weight: 600;
+                            margin-bottom: 12px;
+                        }
+                        
+                        .form-success p {
+                            font-size: 16px;
+                            line-height: 1.5;
+                            color: rgba(0, 0, 0, 0.7);
+                            margin-bottom: 0;
+                        }
+                        
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: translateY(10px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }, 300);
+            });
+        }
+    };
+    
     // Initialize
     setupMobileNav();
     addMobileStyles();
     setupSmoothScroll();
+    setupActiveNavigation();
+    setupContactForm();
 }); 

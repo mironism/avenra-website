@@ -231,6 +231,8 @@ a {
     flex-direction: column;
     justify-content: space-between;
     z-index: 1;
+    margin-bottom: -1px; /* Fix white line by extending slightly past viewport */
+    overflow: hidden;
 }
 
 .site-footer .jobs-link {
@@ -253,9 +255,10 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% + 2px); /* Slightly taller to prevent white line */
     z-index: -1;
     overflow: hidden;
+    transform: translateY(0); /* Force GPU rendering */
 }
 
 .footer-background img,
@@ -263,6 +266,9 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block; /* Remove default space */
+    position: relative;
+    bottom: -1px; /* Pull down slightly to cover any gap */
 }
 
 .footer-wrapper {

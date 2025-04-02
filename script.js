@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Special offset for CTA section
                     if (targetId === '#cta-section') {
-                        offset = 85; // Increase this value to scroll lower
+                        offset = 45; // Increase this value to scroll lower
                     }
                     
                     window.scrollTo({

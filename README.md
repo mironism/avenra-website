@@ -1,6 +1,6 @@
-# Avenra Website
+# Ascenswiss Website
 
-A clean, minimalist website for Avenra, a Swiss-based boutique agency focused on building tailor-made AI products and solutions. The design reflects Swiss precision, clarity, and intentional design principles combined with the modern power of AI technologies.
+A clean, minimalist website for Ascenswiss, a Swiss-based boutique agency focused on building tailor-made AI products and solutions. The design reflects Swiss precision, clarity, and intentional design principles combined with the modern power of AI technologies.
 
 ## Features
 

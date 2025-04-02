@@ -109,7 +109,32 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(style);
     };
     
+    // Simple smooth scroll without changing active states
+    const setupSmoothScroll = () => {
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetId === '#top' ? 0 : targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without causing a page jump
+                    history.pushState(null, null, targetId);
+                }
+            });
+        });
+    };
+    
     // Initialize
     setupMobileNav();
     addMobileStyles();
+    setupSmoothScroll();
 }); 

@@ -3,6 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/de", "destination": "/de.html" },
+    { "source": "/index", "destination": "/index.html" },
     { "source": "/terms", "destination": "/terms.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/team", "destination": "/team.html" },

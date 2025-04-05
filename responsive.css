@@ -122,6 +122,8 @@ body.no-scroll {
         color: rgba(0, 0, 0, 0.7);
         text-decoration: none;
         transition: color 0.2s ease;
+        display: block;
+        padding: 8px 0;
     }
     
     .mobile-menu a:hover, 
@@ -194,64 +196,103 @@ body.no-scroll {
         z-index: 1001;
     }
     
-    /* How We Work section - Fix number and title alignment */
+    /* How We Work section - Vertical stacking with PROPER center alignment */
     .work-steps {
         display: flex !important;
         flex-direction: column !important;
-        gap: 30px !important;
-        margin: 30px 0 !important;
+        gap: 40px !important;
+        margin: 30px auto !important; /* Add auto horizontal margins */
+        width: 100% !important;
+        text-align: center !important; /* Center all text inside */
     }
     
     .work-steps::before {
-        top: 0;
-        bottom: 0;
-        left: 20px;
-        right: auto;
-        width: 1px;
-        height: calc(100% - 60px);
-        margin-top: 30px;
+        display: none !important; /* Remove the vertical line */
     }
     
     .step {
-        padding-left: 60px !important;
+        padding: 0 !important; /* Remove ALL padding */
         position: relative !important;
-        margin-bottom: 20px !important;
+        margin: 0 auto !important; /* Add auto horizontal margins */
         display: flex !important;
         flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 280px !important; /* Limit width for better mobile layout */
     }
     
     .step-number {
-        position: absolute !important;
-        left: 0 !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
         width: 40px !important;
         height: 40px !important;
         font-size: 14px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin-top: -12px !important; /* Adjust vertical alignment with h3 */
+        margin: 0 auto 15px !important;
+        z-index: 2 !important;
     }
     
     .step h3 {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-        margin-bottom: 8px !important;
+        margin: 0 auto !important; /* Center with auto margins */
+        padding: 0 0 12px !important;
+        line-height: 1.3 !important;
+        text-align: center !important; /* Explicitly center text */
+        width: 100% !important;
+        font-weight: 600 !important;
     }
     
     .step p {
-        margin-top: 0 !important;
+        margin: 0 auto !important; /* Center with auto margins */
+        text-align: center !important; /* Explicitly center text */
+        width: 100% !important;
+        color: rgba(0, 0, 0, 0.6) !important;
     }
     
-    /* What We Do section */
+    /* What We Do section - updated for categories */
+    .category-title {
+        font-size: 20px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .capability-category {
+        margin-bottom: 30px !important;
+    }
+    
     .capabilities-grid {
         grid-template-columns: 1fr !important;
         gap: 1px !important;
+        margin-bottom: 16px !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
     }
     
     .capability-item {
         padding: 20px !important;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .capability-item:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Override any nth-child rules for borders */
+    .capabilities-grid .capability-item:nth-child(5) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .capabilities-grid .capability-item:nth-child(5):last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Commercial grid specific adjustments */
+    .commercial-grid .capability-item:last-child {
+        border-bottom: none !important;
     }
     
     /* What's Not section - Fix alignment */
@@ -284,20 +325,66 @@ body.no-scroll {
     
     /* Who We Are section - Text above values, stacked layout */
     .manifesto-layout {
-        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 30px !important;
         margin-top: 30px !important;
     }
     
+    .manifesto-text {
+        width: 100% !important;
+        flex: none !important; /* Remove flex properties to prevent stretching */
+    }
+    
+    /* Who We Are section - Fix border issues */
     .values-grid {
+        width: 100% !important;
+        display: grid !important;
         grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        gap: 0 !important;
+        margin: 0 !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        position: relative !important; /* Add positioning context */
+        z-index: 0 !important; /* Set base z-index */
+        background-color: var(--background-color) !important;
     }
     
     .value-item {
-        padding-bottom: 16px !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        padding: 20px !important;
+        border: none !important; /* Remove all borders */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; /* Only add bottom border */
+        background-color: var(--background-color) !important;
+        flex: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    .value-item:last-child {
+        border-bottom: none !important; /* Remove bottom border from last item */
+    }
+    
+    /* Ensure no duplicate borders from overlaps */
+    .value-item::before,
+    .value-item::after {
+        display: none !important; /* Remove any pseudo-elements that might add borders */
+    }
+    
+    .value-item h3 {
+        font-size: 18px !important; /* Match capability-item h3 size */
+        margin-bottom: 8px !important; /* Match capability-item spacing */
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+    }
+    
+    .value-item p {
+        font-size: 16px !important; /* Match capability-item p size */
+        color: rgba(0, 0, 0, 0.6) !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
     }
     
     /* Use Cases section */
@@ -346,6 +433,37 @@ body.no-scroll {
         align-items: center !important;
         gap: 20px !important;
         text-align: center !important;
+    }
+    
+    .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 15px !important;
+    }
+    
+    /* Footer language switcher alignment */
+    .footer-legal {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    .footer-legal a,
+    .footer-legal .lang-switcher {
+        margin: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        height: 20px !important; /* Fixed height for consistent alignment */
+    }
+    
+    .footer-legal .lang-switcher {
+        margin-left: 0 !important;
+        position: relative !important;
     }
     
     /* Section dividers */
@@ -397,6 +515,43 @@ body.no-scroll {
     .contact-alternative .btn-secondary {
         display: inline !important;
         white-space: nowrap !important;
+    }
+    
+    /* Mobile section and anchor adjustments */
+    .feature-number {
+        display: inline-block;
+        padding-top: 0;
+        margin-top: 0;
+        font-size: 18px !important;
+    }
+    
+    /* Pain point bullet fixes for mobile */
+    .pain-point-bullet {
+        color: var(--swiss-green) !important;
+    }
+    
+    .pain-point-bullet::before {
+        content: "●";
+        color: var(--swiss-green) !important;
+        display: inline-block !important;
+    }
+    
+    /* Reset all explicit scroll-margin properties */
+    #business-os,
+    #ai-native-os,
+    #how-we-work,
+    #capabilities,
+    #who-we-are,
+    #experiments,
+    #cta-section,
+    section[id] {
+        scroll-margin-top: 0 !important;
+    }
+    
+    /* Remove any ::before elements that might be causing issues */
+    section[id]::before,
+    div[id]::before {
+        display: none !important;
     }
 }
 
@@ -547,5 +702,57 @@ body.no-scroll {
     /* Hide mobile elements on desktop */
     .hamburger, .mobile-brand, .mobile-menu, .header-bar {
         display: none !important;
+    }
+}
+
+/* Who We Are Section Responsive */
+@media (max-width: 992px) and (min-width: 768px) {
+    .manifesto-layout {
+        flex-direction: column;
+        gap: 30px; /* Reduced from 40px */
+    }
+    
+    .manifesto-text, .values-grid {
+        width: 100%;
+    }
+    
+    /* Keep values-grid as a vertical stack on tablet */
+    .values-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Reduced from 16px for tighter mobile spacing */
+        max-width: 600px; /* Prevent cards from getting too wide on tablet */
+        margin: 0 auto;
+    }
+}
+
+/* Remove these overrides for mobile */
+@media (max-width: 767px) {
+    /* We already have better mobile styles in the main mobile section */
+    /* This prevents conflicts with the better styles above */
+}
+
+/* Pain Points List - fix alignment */
+@media (max-width: 767px) {
+    .pain-point-item {
+        display: flex !important;
+        align-items: center !important; /* Center align the dot with text */
+        margin-bottom: 12px !important;
+    }
+    
+    .pain-point-bullet {
+        color: rgba(0, 0, 0, 0.6) !important;
+        margin-right: 12px !important;
+        font-size: 14px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 18px !important;
+        flex-shrink: 0 !important; /* Prevent the bullet from shrinking */
+    }
+    
+    .pain-point-item p {
+        margin: 0 !important;
+        flex: 1 !important;
     }
 } 

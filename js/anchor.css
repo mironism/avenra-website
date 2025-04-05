@@ -1,0 +1,155 @@
+/**
+ * Avenra Website - Anchor Navigation System CSS
+ * Contains all styles related to the section anchoring system
+ */
+
+/* ==== ANCHOR FEATURE - ISOLATED CSS ==== */
+
+/* Remove any default scroll behavior and let JS handle it */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reset all previous anchor-related scroll margins */
+section[id]::before,
+div[id]::before,
+#business-os::before,
+#ai-native-os::before,
+#how-we-work::before,
+#capabilities::before,
+#who-we-are::before,
+#experiments::before,
+#cta-section::before {
+    content: "";
+    display: none !important;
+}
+
+/* Reset all scroll margins to 0 to let JS dynamically calculate positions */
+section[id], 
+#business-os, 
+#ai-native-os, 
+#how-we-work, 
+#capabilities, 
+#who-we-are, 
+#experiments, 
+#cta-section {
+    scroll-margin-top: 0 !important;
+}
+
+/* Style for feature numbers to ensure consistent alignment */
+.feature-number {
+    display: inline-block; 
+    line-height: 1;
+    padding-top: 0; 
+    margin-top: 0;
+}
+
+/* Special styling for the Contact Us section */
+#cta-section {
+    position: relative;
+    margin-bottom: 30px; /* Ensure good spacing above footer */
+}
+
+#cta-section .cta-content {
+    position: relative;
+    padding-top: 0; /* Removed padding since we're using a negative offset now */
+}
+
+/* Added specific target for the CTA section heading */
+#cta-section .cta-content h2 {
+    position: relative;
+    margin-top: 0;
+    line-height: 1.2;
+}
+
+/* Remove unnecessary pseudo-elements */
+#cta-section .cta-content h2::before,
+#cta-section .cta-content::before {
+    display: none;
+}
+
+/* Language switcher styles - Added with !important to override other rules */
+.lang-link {
+    font-size: 14px !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+    transition: color 0.15s ease !important;
+    text-decoration: none !important;
+}
+
+.lang-link.active {
+    color: #000000 !important;
+    font-weight: 700 !important; /* Make it bolder */
+}
+
+.lang-link:hover {
+    color: var(--swiss-green) !important;
+}
+
+/* Footer language styles */
+.footer .lang-link {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.footer .lang-link.active {
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+.footer .lang-separator {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Active state styling for navigation links */
+.sidebar-nav a.active:not(.logo) {
+    color: var(--swiss-green);
+    font-weight: 500;
+}
+
+.mobile-menu a.active:not(.logo) {
+    color: var(--swiss-green);
+    font-weight: 500;
+}
+
+/* Mobile-specific styling */
+@media (max-width: 767px) {
+    /* Reset feature number styling on mobile */
+    .feature-number {
+        display: inline-block;
+        padding-top: 0;
+        margin-top: 0;
+    }
+    
+    /* Reset all explicit scroll margins */
+    #business-os,
+    #ai-native-os,
+    #how-we-work,
+    #capabilities,
+    #who-we-are,
+    #experiments,
+    #cta-section,
+    section[id] {
+        scroll-margin-top: 0 !important;
+    }
+    
+    /* Remove any ::before pseudo-elements */
+    section[id]::before,
+    div[id]::before {
+        display: none !important;
+    }
+    
+    /* Adjust Contact Us section on mobile */
+    #cta-section .cta-content {
+        padding-top: 10px; /* Decreased from 80px to 10px */
+    }
+    
+    /* Ensure language switcher works on mobile too */
+    .lang-link.active {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Ensure pain point bullets are green on mobile */
+    .pain-point-bullet::before {
+        color: var(--swiss-green) !important;
+    }
+} 

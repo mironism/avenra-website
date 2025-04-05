@@ -1,3 +1,42 @@
+// Language switcher functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Determine current language from URL path
+    const path = window.location.pathname;
+    const isGerman = path.includes('/de');
+    
+    // Update active state for all language switchers
+    const langLinks = document.querySelectorAll('.lang-link');
+    langLinks.forEach(link => {
+        // Remove active class from all
+        link.classList.remove('active');
+        
+        // Add active class to current language
+        if ((isGerman && link.getAttribute('lang') === 'de') || 
+            (!isGerman && link.getAttribute('lang') === 'en')) {
+            link.classList.add('active');
+        }
+        
+        // Add click handler for smooth language switching
+        link.addEventListener('click', function(e) {
+            // Only intercept if we're not already on this language page
+            if (!this.classList.contains('active')) {
+                e.preventDefault();
+                const targetLang = this.getAttribute('lang');
+                const targetUrl = targetLang === 'en' ? '/en' : '/de';
+                
+                // Fade out effect before redirect (optional)
+                document.body.style.opacity = '0.5';
+                document.body.style.transition = 'opacity 0.3s ease';
+                
+                // Redirect after short delay for smoother experience
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 300);
+            }
+        });
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     const setupMobileMenu = () => {
@@ -11,39 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 hamburger.classList.toggle('open');
                 mobileMenu.classList.toggle('open');
                 document.body.classList.toggle('no-scroll');
-            });
-            
-            // Close menu when a link is clicked and scroll to section
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hamburger.classList.remove('open');
-                    mobileMenu.classList.remove('open');
-                    document.body.classList.remove('no-scroll');
-                    
-                    // Smooth scroll to target section
-                    const targetId = link.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        let offset = 20; // Default offset for mobile
-                        
-                        // Special offset for CTA section
-                        if (targetId === '#cta-section') {
-                            offset = 40;
-                        }
-                        
-                        setTimeout(() => {
-                            window.scrollTo({
-                                top: targetId === '#top' ? 0 : targetElement.offsetTop - offset,
-                                behavior: 'smooth'
-                            });
-                            
-                            // Update URL without causing a page jump
-                            history.pushState(null, null, targetId);
-                        }, 300); // Small delay to ensure menu is closed first
-                    }
-                });
             });
         }
         
@@ -169,81 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(style);
     };
     
-    // Simple smooth scroll with special handling for CTA section
-    const setupSmoothScroll = () => {
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    let offset = 65; // Default offset
-                    
-                    // Special offset for CTA section
-                    if (targetId === '#cta-section') {
-                        offset = 45; // Increase this value to scroll lower
-                    }
-                    
-                    window.scrollTo({
-                        top: targetId === '#top' ? 0 : targetElement.offsetTop - offset,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update URL without causing a page jump
-                    history.pushState(null, null, targetId);
-                }
-            });
-        });
-    };
-    
-    // Set up Intersection Observer for detecting active sections
-    const setupActiveNavigation = () => {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.sidebar-nav a:not(.logo)');
-        
-        const options = {
-            rootMargin: '-10% 0px -85% 0px', // Consider a section in view when it's 10% from the top and 85% from the bottom
-            threshold: 0
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Get the id of the current section
-                    const id = entry.target.getAttribute('id');
-                    
-                    // Remove active class from all links
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    
-                    // Add active class to the corresponding link
-                    const correspondingLink = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
-                    if (correspondingLink) {
-                        correspondingLink.classList.add('active');
-                    }
-                }
-            });
-        }, options);
-        
-        // Observe all sections
-        sections.forEach(section => {
-            if (section.id) {
-                observer.observe(section);
-            }
-        });
-        
-        // Also observe the top section
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
-            observer.observe(heroSection);
-        }
-    };
-    
     // Handle contact form submission
     const setupContactForm = () => {
         const contactForm = document.querySelector('.contact-form');
@@ -312,7 +243,74 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
     setupMobileNav();
     addMobileStyles();
-    setupSmoothScroll();
-    setupActiveNavigation();
     setupContactForm();
+});
+
+// Typing Effect Animation
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Get the elements
+    const part1 = document.getElementById('typing-effect-part1');
+    const part2 = document.getElementById('typing-effect-part2');
+    const cursor = document.getElementById('typing-cursor');
+    const container = document.getElementById('typing-effect-container');
+    
+    // If elements don't exist, exit early
+    if (!part1 || !part2 || !cursor || !container) return;
+    
+    // Define the text to type based on the current language
+    const isGerman = document.documentElement.lang === 'de';
+    const text = isGerman ? "die das Unternehmen aufbauen" : "That Build the Business";
+    
+    // For users who prefer reduced motion, show the full text immediately
+    if (prefersReducedMotion) {
+        part2.textContent = text;
+        cursor.style.display = 'none';
+        return;
+    }
+    
+    // Empty the text initially
+    part2.textContent = '';
+    
+    // Set cursor position at the beginning
+    cursor.style.display = 'inline-block';
+    
+    // Add a slight delay to ensure page is rendered before animation starts
+    setTimeout(() => {
+        // Type the text
+        let charIndex = 0;
+        const typingSpeed = 100; // milliseconds per character
+        
+        const typingInterval = setInterval(function() {
+            if (charIndex < text.length) {
+                part2.textContent += text.charAt(charIndex);
+                charIndex++;
+            } else {
+                // Stop blinking cursor after typing is complete
+                setTimeout(() => {
+                    cursor.style.animation = 'none';
+                    cursor.style.opacity = '0';
+                }, 1000);
+                
+                clearInterval(typingInterval);
+            }
+        }, typingSpeed);
+    }, 500); // 500ms delay before starting
+});
+
+// Toggle the mobile menu
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('open');  // Add 'open' class for CSS targeting
+            document.body.classList.toggle('no-scroll');
+        });
+    }
 }); 

@@ -1,3 +1,6 @@
+/* Remove serif font import */
+/* @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap'); */
+
 /* Base styles */
 :root {
     --primary-color: #0047AB; /* Swiss blue */
@@ -6,9 +9,16 @@
     --light-color: #FFFFFF;
     --background-color: #FCFCFC;
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    /* Remove serif secondary font */
+    /* --font-secondary: 'Libre Baskerville', Georgia, serif; */ 
     --grid-columns: 12; /* 12-column grid */
     --grid-gap: 20px; /* Gap between grid columns */
     --container-width: 1200px; /* Maximum container width */
+    --swiss-green: #364D3C; /* New Swiss-style olive green accent color */
+    --divider-color: #E0E0E0; /* Light divider color */
+    --section-padding: 60px; /* Increased from 40px to 60px */
+    --section-margin: 60px; /* Increased from 40px to 60px */
+    --sidebar-padding-top: 110px; /* Exact value to ensure alignment */
 }
 
 * {
@@ -25,9 +35,9 @@ html, body {
     min-height: 100%;
 }
 
+/* Simple scroll behavior */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Adjusted padding for better alignment with navbar */
 }
 
 body {
@@ -50,11 +60,11 @@ a {
 
 /* Sidebar */
 .sidebar {
-    grid-column: 1 / 4; /* Move sidebar to start at column 2 */
+    grid-column: 1 / 4;
     position: fixed;
     top: 0;
     bottom: 0;
-    padding: 110px 0 40px 20px; /* Increase top padding to match content */
+    padding: var(--sidebar-padding-top) 0 40px 20px; /* Use the variable for consistent values */
     display: flex;
     flex-direction: column;
     z-index: 100;
@@ -75,22 +85,27 @@ a {
     color: rgba(0, 0, 0, 0.5); /* text-neutral-500 equivalent */
     transition: color 0.15s ease; /* transition-colors duration-150 equivalent */
     text-decoration: none;
+    letter-spacing: 0.02em; /* Subtle letter spacing for nav items */
 }
 
 /* Hover state for all links */
 .sidebar-nav a:hover {
-    color: rgba(0, 0, 0, 0.7); /* text-neutral-700 equivalent */
+    color: var(--swiss-green);
 }
 
 /* Special styling for Avenra link */
 .sidebar-nav a.logo {
     font-weight: 700; /* font-bold equivalent */
-    color: rgba(0, 0, 0, 0.7); /* text-neutral-700 equivalent */
+    color: #000000 !important; /* Solid black color with !important */
+}
+
+.sidebar-nav a.logo:hover {
+    color: #000000 !important; /* Ensure black on hover with !important */
 }
 
 /* Active state for section links */
 .sidebar-nav a.active:not(.logo) {
-    color: rgba(0, 0, 0, 0.9); /* text-neutral-900 equivalent */
+    color: var(--swiss-green);
     font-weight: 500; /* font-medium equivalent */
 }
 
@@ -108,7 +123,17 @@ a {
 
 /* Hero section */
 .hero {
-    padding: 100px 0 40px; /* Increased bottom padding to match spacing with divider */
+    padding: 100px 0 60px;
+    width: 100%;
+    border-top: none;
+    border-bottom: none;
+}
+
+/* Keep one divider after hero section */
+.hero + .section-divider {
+    display: block;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0;
     width: 100%;
 }
 
@@ -118,6 +143,41 @@ a {
     line-height: 1.2;
     margin-bottom: 40px;
     letter-spacing: -0.02em;
+    font-family: var(--font-sans); /* Use sans-serif font */
+    height: auto;
+    min-height: 120px; /* Add fixed minimum height to prevent layout shifts */
+}
+
+/* Typing effect container styles */
+#typing-effect-container {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#typing-effect-part1, 
+#typing-effect-part2 {
+    display: inline;
+}
+
+#typing-effect-part2 {
+    position: relative;
+}
+
+#typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: #000;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .hero-description {
@@ -134,27 +194,65 @@ a {
 .section-divider {
     border: none;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin: 40px 0;
+    margin: 60px 0;
     width: 100%;
+}
+
+/* First feature after hero shouldn't have border */
+.hero + .section-divider + .feature {
+    border-top: none;
 }
 
 /* Feature sections */
 .feature {
-    padding: 40px 0; /* Reduced padding to make blocks closer */
+    padding-top: 60px;
+    padding-bottom: 60px;
     width: 100%;
+    border-top: 1px solid var(--divider-color);
+    border-bottom: none;
+    margin-bottom: 0;
+    position: relative;
+}
+
+/* Remove bottom margin from last elements in feature sections */
+.feature > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+.feature p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Remove bottom margin from grid elements at the end of sections */
+.feature .capabilities-grid:last-child,
+.feature .work-steps:last-child,
+.feature .case-tiles:last-child,
+.feature .manifesto-layout:last-child,
+.feature .pain-points-list:last-child {
+    margin-bottom: 0 !important;
 }
 
 .feature-number {
     font-size: 20px;
     font-weight: 600;
+    color: #222222;
+    letter-spacing: 0.03em;
     margin-bottom: 16px;
+    position: relative;
+    display: inline-block; /* Ensure the element has the right dimensions */
+    line-height: 1; /* Tighter line height for precise positioning */
+    /* Consistent positioning for alignment */
+    padding-top: 0; 
+    margin-top: 0;
 }
 
+/* Apply serif font to main section H2 headings */
 .feature h2 {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 24px;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
 }
 
 .feature p {
@@ -168,11 +266,12 @@ a {
     font-size: 18px;
     text-decoration: underline;
     text-underline-offset: 4px;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .text-link:hover {
-    opacity: 0.7;
+    color: var(--swiss-green);
+    opacity: 0.9;
 }
 
 /* Feature media */
@@ -346,12 +445,12 @@ a {
     }
     
     .hero {
-        padding: 40px 0 30px;
+        padding: 40px 0 20px;
     }
     
     .hero h1 {
         font-size: 36px;
-        margin-bottom: 24px;
+        min-height: 90px; /* Smaller height for mobile */
     }
     
     .hero-description p {
@@ -361,7 +460,7 @@ a {
     }
     
     .feature {
-        padding: 40px 0;
+        padding: 20px 0;
     }
     
     .feature-number {
@@ -378,6 +477,10 @@ a {
         font-size: 16px;
         margin-bottom: 20px;
         line-height: 1.5;
+    }
+    
+    .section-divider {
+        margin: 20px 0; /* Smaller margin for mobile */
     }
     
     .work-steps {
@@ -477,8 +580,7 @@ a {
     }
     
     .cta-section {
-        margin: 40px 0;
-        padding: 40px 0;
+        padding: 20px 0;
     }
     
     .cta-content h2 {
@@ -520,11 +622,20 @@ a {
         align-items: flex-start;
         gap: 20px;
     }
+    
+    #business-os,
+    #ai-native-os,
+    #how-we-work,
+    #what-we-do,
+    #who-we-are,
+    #cta-section {
+        scroll-margin-top: 80px;
+    }
 }
 
 /* Capabilities Grid */
 .scope-header {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
     margin: 40px 0 24px;
     color: var(--text-color);
@@ -533,19 +644,59 @@ a {
 .capabilities-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 1px;
-    margin: 0 0 40px;
+    grid-auto-flow: dense;
+    gap: 0;
+    margin: 0 0 20px;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.08);
     overflow: hidden;
+    background-color: var(--background-color);
+    position: relative;
 }
 
 .capability-item {
     padding: 24px;
     background-color: var(--background-color);
     transition: all 0.2s ease;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+/* Right column items have no right border */
+.capability-item:nth-child(2n) {
+    border-right: none;
+}
+
+/* Remove bottom border from last row - only for the last item in odd-count grids and last two items in even-count grids */
+.capability-item:nth-last-child(1):nth-child(odd),
+.capability-item:nth-last-child(1):nth-child(even),
+.capability-item:nth-last-child(2):nth-child(even) {
+    border-bottom: none;
+}
+
+/* If there's an odd number of items, the last one needs a right border */
+.capability-item:last-child:nth-child(odd) {
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Hide empty cells by removing their borders */
+.capabilities-grid::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: var(--background-color);
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 1px;
+    z-index: 1;
+}
+
+.capability-item:hover {
+    background-color: var(--swiss-green);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    z-index: 2;
 }
 
 .capability-item h3 {
@@ -553,6 +704,12 @@ a {
     font-weight: 600;
     margin-bottom: 8px;
     color: var(--text-color);
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
+}
+
+.capability-item:hover h3 {
+    color: var(--light-color);
 }
 
 .capability-item p {
@@ -561,9 +718,8 @@ a {
     margin: 0;
 }
 
-.capability-item:hover {
-    background-color: rgba(0, 0, 0, 0.02);
-    transform: translateY(-1px);
+.capability-item:hover p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 768px) {
@@ -578,10 +734,12 @@ a {
 }
 
 .not-in-scope h3 {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
     margin-bottom: 24px;
     color: var(--text-color);
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
 }
 
 .not-in-scope-items {
@@ -633,7 +791,7 @@ a {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin: 40px 0;
+    margin: 50px 0; /* Increased margin for better spacing */
     position: relative;
 }
 
@@ -666,8 +824,8 @@ a {
     justify-content: center;
     font-size: 16px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.6);
-    background-color: var(--background-color);
+    color: var(--light-color); /* Keep white text */
+    background-color: var(--swiss-green); /* Restore green background */
     margin-bottom: 16px;
     z-index: 1;
     transition: all 0.3s ease;
@@ -678,6 +836,8 @@ a {
     font-weight: 600;
     margin-bottom: 8px;
     color: var(--text-color);
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
 }
 
 .step p {
@@ -693,7 +853,8 @@ a {
 
 .step:hover .step-number {
     border-color: rgba(0, 0, 0, 0.3);
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--light-color);
+    background-color: var(--swiss-green); /* Keep green on hover */
 }
 
 /* Responsive adjustments for work steps */
@@ -778,12 +939,13 @@ a {
     }
 }
 
+/* Change case tags back to green */
 .case-tag {
     display: inline-block;
     font-size: 11px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.5);
-    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--light-color);
+    background-color: var(--swiss-green); /* Changed back to green */
     padding: 3px 6px;
     border-radius: 2px;
     margin-bottom: 12px;
@@ -797,6 +959,8 @@ a {
     line-height: 1.4;
     color: var(--text-color);
     margin: 0;
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
 }
 
 @media (max-width: 768px) {
@@ -810,15 +974,19 @@ a {
     }
 }
 
-/* CTA Section */
+/* CTA Section styling */
 .cta-section {
-    margin: 40px 0;
-    padding: 60px 0;
+    margin: 0;
+    padding-top: 60px;
+    padding-bottom: 30px; /* Reduced from 60px to 30px */
+    width: 100%;
     background-color: transparent;
+    border-top: 1px solid var(--divider-color);
 }
 
 .cta-content {
     max-width: 780px;
+    margin-bottom: 0; /* Ensure no extra margin at bottom */
 }
 
 .cta-content h2 {
@@ -826,7 +994,9 @@ a {
     font-weight: 600;
     line-height: 1.3;
     margin-bottom: 24px;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em; /* Adjusted letter spacing */
+    color: var(--text-color);
+    font-family: var(--font-sans); /* Use sans-serif font */
 }
 
 .cta-content p {
@@ -834,6 +1004,37 @@ a {
     line-height: 1.5;
     color: rgba(0, 0, 0, 0.7);
     margin-bottom: 40px;
+}
+
+/* Ensure all headings are darker but not pure black */
+h1, h2, h3, h4, h5, h6 {
+    color: #222222 !important;
+}
+
+/* Override for capability and value items to allow hover color change */
+.capability-item:hover h3,
+.value-item:hover h3 {
+    color: var(--light-color) !important;
+}
+
+/* Ensure bold/strong text is darker but not pure black */
+strong, b {
+    color: #222222 !important;
+    font-weight: 600;
+}
+
+/* Make specific sentences dark but not pure black */
+.hero-description p strong,
+.feature p strong {
+    color: #222222 !important;
+    font-weight: 600;
+}
+
+.form-intro {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px !important;
+    color: #222222 !important;
 }
 
 /* Contact Form */
@@ -850,7 +1051,7 @@ a {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px;
-    color: var(--text-color);
+    color: #222222;
 }
 
 .form-group input,
@@ -861,7 +1062,7 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     background-color: transparent;
-    color: var(--text-color);
+    color: #222222;
     font-family: inherit;
     transition: border-color 0.2s ease;
 }
@@ -878,8 +1079,15 @@ a {
 }
 
 .contact-form .btn-primary {
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: var(--swiss-green);
+    border: 1px solid var(--swiss-green);
     cursor: pointer;
+    color: var(--light-color);
+}
+
+.contact-form .btn-primary:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: rgba(0, 0, 0, 0.5);
 }
 
 .contact-alternative {
@@ -891,7 +1099,7 @@ a {
 .contact-alternative p {
     font-size: 16px;
     margin-bottom: 16px;
-    color: rgba(0, 0, 0, 0.7);
+    color: #222222;
 }
 
 .cta-buttons {
@@ -904,27 +1112,32 @@ a {
 .btn-primary {
     display: inline-block;
     padding: 12px 28px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--swiss-green);
     border-radius: 4px;
     font-size: 16px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.7);
-    background-color: transparent;
+    color: var(--light-color);
+    background-color: var(--swiss-green);
     transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: rgba(0, 0, 0, 0.5);
 }
 
 .btn-secondary {
     display: inline-block;
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     transition: all 0.2s ease;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .btn-secondary:hover {
+    color: var(--swiss-green);
     text-decoration: underline;
 }
 
@@ -982,65 +1195,74 @@ a {
     }
 }
 
-/* Who We Are - Manifesto Layout */
-.who-we-are {
-    /* Removing extra padding to match other feature sections */
-}
-
+/* Who We Are Section Styles */
 .manifesto-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    align-items: stretch; /* Ensure both columns stretch to the same height */
 }
 
-.manifesto-text p {
-    font-size: 18px;
-    line-height: 1.5; /* Updated to match feature p line-height */
-    margin-bottom: 24px;
+.manifesto-text {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
 }
 
-.manifesto-text p:last-child {
-    margin-bottom: 0;
+.manifesto-text p:first-child {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
 }
 
 .values-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Reduced gap between cards */
+    padding-top: 6px; /* Slight adjustment to top padding */
+    height: auto;
 }
 
+/* Make the value items distribute evenly */
 .value-item {
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px 15px 15px; /* Reduced bottom padding */
+    background-color: var(--background-color);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    flex: 0 1 auto; /* Changed from flex: 1 to not stretch */
+    display: flex;
+    flex-direction: column;
+}
+
+.value-item:hover {
+    background-color: var(--swiss-green);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .value-item h3 {
-    font-size: 18px;
+    font-size: 0.975rem; /* Slightly smaller font */
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 3px; /* Less space between title and text */
     color: var(--text-color);
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
+}
+
+.value-item:hover h3 {
+    color: var(--light-color);
 }
 
 .value-item p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 0.8rem; /* Smaller description text */
     color: rgba(0, 0, 0, 0.6);
+    line-height: 1.35; /* Tighter line height */
     margin: 0;
 }
 
-@media (max-width: 992px) {
-    .manifesto-layout {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    .values-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
+.value-item:hover p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Privacy and Terms styles */
@@ -1107,145 +1329,99 @@ a {
 
 /* Footer */
 .footer {
+    width: 100%;
+    background-color: #111; /* Dark background instead of video */
+    color: rgba(255, 255, 255, 0.8);
     position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    margin-top: 80px;
-    margin-bottom: 0;
-    padding: 0;
-    min-height: 320px;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.footer-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.footer-bg video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    padding: 30px 0;
+    margin-top: 30px; /* Reduced from default value */
 }
 
 .footer-container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 60px 40px;
-    color: var(--light-color);
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+    padding: 0 20px;
 }
 
-/* Top section with logo and nav */
-.footer-top {
+.footer-content {
     display: flex;
-    flex-direction: column;
-    gap: 32px;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .footer-logo {
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--light-color);
-    cursor: default;
-}
-
-.footer-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    position: relative;
-    z-index: 5;
-}
-
-.footer-nav a {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 16px;
-    transition: color 0.3s ease;
-    text-decoration: none;
-    margin: -8px;
-    cursor: pointer;
-}
-
-.footer-nav a:hover {
-    color: #FFFFFF;
-}
-
-/* Bottom section with copyright and legal */
-.footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 32px;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-copyright {
-    font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
 }
 
 .footer-legal {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    gap: 20px;
 }
 
 .footer-legal a {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    transition: color 0.3s ease;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
+    transition: color 0.15s ease;
+    font-size: 14px;
 }
 
 .footer-legal a:hover {
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 1);
 }
 
-/* Responsive adjustments */
+.footer .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.footer .lang-link {
+    color: rgba(255, 255, 255, 0.6);
+    padding: 2px 4px;
+}
+
+.footer .lang-link.active {
+    color: white;
+    font-weight: 700;
+}
+
+.footer .lang-separator {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Media queries for responsive footer */
 @media (max-width: 768px) {
-    .footer-container {
-        padding: 40px 24px 32px;
-        gap: 60px;
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
     }
     
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 24px;
+    .footer-legal {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
 }
 
 .clear-fix {
     clear: both;
-    width: 100%;
-    height: 1px;
+    height: 0;
+    display: block;
 }
 
 .nav-link {
@@ -1270,4 +1446,523 @@ a {
 
 .footer-nav-link:hover {
     color: #FFFFFF !important;
+}
+
+/* Pain Points List */
+.pain-points-intro {
+    margin-bottom: 16px;
+}
+
+.pain-points-list {
+    margin: 0 0 24px 0;
+}
+
+.pain-point-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.pain-point-bullet {
+    color: var(--swiss-green) !important; /* Added !important to ensure color is applied */
+    margin-right: 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+}
+
+/* Use ::before to create filled circle instead of the Unicode character */
+.pain-point-bullet::before {
+    content: "●"; /* Filled circle */
+    display: inline-block;
+    font-size: 12px; /* Slightly smaller for better proportion */
+    color: var(--swiss-green) !important; /* Ensure bullet is green */
+}
+
+.pain-point-item p {
+    margin: 0;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .pain-point-item {
+        margin-bottom: 10px;
+    }
+    
+    .pain-point-bullet {
+        margin-right: 10px;
+        color: var(--swiss-green) !important; /* Ensure color is applied on mobile */
+    }
+    
+    .pain-point-bullet::before {
+        color: var(--swiss-green) !important; /* Ensure bullet is green on mobile */
+    }
+}
+
+/* Capability Categories */
+.capability-category {
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    padding-left: 0;
+    margin-top: 0;
+    letter-spacing: 0.01em; /* Slight letter spacing */
+    font-family: var(--font-sans); /* Use sans-serif font */
+}
+
+/* Business Strategy Grid Specific Styling */
+.business-strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Top Row */
+.business-strategy-grid .capability-item:nth-child(1) {
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-left: none !important;
+    border-top: none !important;
+}
+
+.business-strategy-grid .capability-item:nth-child(2) {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-left: none !important;
+    border-top: none !important;
+}
+
+/* Middle Row */
+.business-strategy-grid .capability-item:nth-child(3) {
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-left: none !important;
+    border-top: none !important;
+}
+
+.business-strategy-grid .capability-item:nth-child(4) {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-left: none !important;
+    border-top: none !important;
+}
+
+/* Bottom Row */
+.business-strategy-grid .capability-item:nth-child(5) {
+    grid-column: 1 / 2 !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-top: none !important;
+}
+
+/* Mobile adjustments for capability categories */
+@media (max-width: 768px) {
+    .capability-category {
+        margin-bottom: 30px;
+    }
+    
+    .category-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+    
+    .capabilities-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Special styling for the two-item commercial grid */
+.commercial-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.commercial-grid .capability-item {
+    border-bottom: none;
+}
+
+.commercial-grid .capability-item:nth-child(2) {
+    border-right: none;
+}
+
+@media (max-width: 768px) {
+    .commercial-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .commercial-grid .capability-item:nth-child(1) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* Five-item grid special styling */
+/* (these styles are no longer needed so removing them) */
+
+@media (max-width: 768px) {
+    /* No longer needed - removing this */
+}
+
+/* Language Switcher - Complete simplification to prevent blinking */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 30px;
+}
+
+/* Add divider above language switcher */
+.sidebar-nav .lang-switcher::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    max-width: 50px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-nav .lang-switcher {
+    margin-top: 20px;
+    padding-left: 0;
+    align-self: flex-start;
+    width: auto;
+    margin-left: 0;
+}
+
+/* Fix EN | DE spacing */
+.lang-separator {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
+
+/* Super simplified language link styling */
+.lang-link {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    transition: color 0.15s ease;
+}
+
+.lang-link.active {
+    color: #000000 !important;
+    font-weight: 700 !important; /* Increased to 700 for more boldness */
+}
+
+.lang-link:hover {
+    color: var(--swiss-green);
+}
+
+/* Footer languages */
+.footer .lang-link {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer .lang-link.active {
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+.footer .lang-separator {
+    color: rgba(255, 255, 255, 0.4);
+    padding: 0 4px;
+}
+
+/* Remove all the complex rules */
+/* This removes the blinking by removing all transition/animation effects */
+.lang-link, 
+.lang-link:hover, 
+.lang-link:active, 
+.lang-link.active,
+.sidebar-nav .lang-link, 
+.sidebar-nav .lang-link.active,
+.sidebar-nav .lang-link:hover,
+.footer .lang-link,
+.footer .lang-link.active,
+.footer .lang-link:hover {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -o-transform: none !important;
+    will-change: auto;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+}
+
+/* ==== ANCHOR FEATURE - COMPLETE REFACTOR ==== */
+/* Remove all previous anchor-related code */
+section[id]::before,
+#business-os::before,
+#ai-native-os::before,
+#how-we-work::before,
+#what-we-do::before,
+#who-we-are::before,
+#cta-section::before {
+    display: none !important;
+}
+
+/* Set proper offset for ALL sections with IDs */
+section[id] {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+    position: relative;
+}
+
+/* Specific section targeting for scroll margin - all use the same value */
+#business-os, 
+#ai-native-os, 
+#how-we-work, 
+#what-we-do, 
+#who-we-are, 
+#cta-section {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+/* Mobile adjustment - slightly different offset for mobile */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-padding-top: 80px; /* Smaller padding for mobile */
+    }
+    
+    /* Reset all section margins to the mobile value */
+    section[id],
+    #business-os, 
+    #ai-native-os, 
+    #how-we-work, 
+    #what-we-do, 
+    #who-we-are, 
+    #cta-section {
+        scroll-margin-top: var(--sidebar-padding-top) !important;
+    }
+}
+
+/* Mobile menu styles */
+.mobile-menu a:hover, 
+.mobile-menu a:active {
+    color: var(--swiss-green);
+}
+
+/* Text link styles */
+.text-link {
+    color: var(--text-color);
+    font-size: 18px; 
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: all 0.2s ease;
+}
+
+.text-link:hover {
+    color: var(--swiss-green);
+    opacity: 0.9;
+}
+
+/* Footer language switcher styles */
+.footer-legal .lang-switcher {
+    margin-left: 10px;
+}
+
+/* Font family for headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+}
+
+/* Mobile-specific anchor adjustments */
+@media (max-width: 768px) {
+    /* Smaller spacing for mobile */
+    .feature {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .section-divider {
+        margin: 20px 0;
+    }
+    
+    /* Different anchor offset for mobile */
+    section[id]::before {
+        margin-top: -80px;
+        height: 80px;
+    }
+}
+
+/* Restore smooth scrolling but without specific offset */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Who We Are section styles */
+.who-we-are {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.feature:last-of-type {
+    border-bottom: none;
+}
+
+.feature:last-of-type + hr,
+.feature:last-of-type + .section-divider {
+    display: none;
+}
+
+/* Additional spacing control for CTA section */
+.cta-content > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* COMPLETELY REBUILD ANCHOR POSITIONING */
+/* Remove all previous anchor styling */
+section[id]::before,
+#business-os::before,
+#ai-native-os::before,
+#how-we-work::before,
+#what-we-do::before,
+#who-we-are::before,
+#cta-section::before {
+    display: none !important;
+}
+
+/* Single clean approach for ALL sections */
+section[id] {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+    position: relative;
+}
+
+/* Specific section adjustments - use CSS variable for consistency */
+#business-os {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+#ai-native-os {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+#how-we-work {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+#what-we-do {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+#who-we-are {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+#cta-section {
+    scroll-margin-top: var(--sidebar-padding-top) !important;
+}
+
+/* Add smooth scrolling back */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fix mobile menu language switcher alignment */
+.mobile-menu .lang-switcher {
+    margin: 20px auto 10px;
+    justify-content: center;
+    position: relative;
+}
+
+.mobile-menu .lang-switcher::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Typing animation styling */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+#typing-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+/* For users with reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    #typing-cursor {
+        animation: none;
+    }
+}
+
+/* Anchor positioning adjustments */
+section[id]::before,
+div[id]::before {
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+section[id] {
+    scroll-margin-top: 0; /* Remove fixed scroll margin, we'll calculate it dynamically */
+}
+
+#business-os, 
+#ai-native-os,
+#how-we-work, 
+#what-we-do,
+#who-we-are, 
+#experiments,
+#cta-section {
+    scroll-margin-top: 0; /* Remove fixed scroll margin, we'll calculate it dynamically */
+}
+
+/* New section for anchor alignment control */
+/* Removes all old scroll margins which were causing alignment issues */
+section[id]::before,
+div[id]::before,
+#business-os::before,
+#ai-native-os::before,
+#how-we-work::before,
+#capabilities::before,
+#who-we-are::before,
+#experiments::before,
+#cta-section::before {
+    content: "";
+    display: none;
+}
+
+section[id], 
+#business-os, 
+#ai-native-os, 
+#how-we-work, 
+#capabilities, 
+#who-we-are, 
+#experiments, 
+#cta-section {
+    scroll-margin-top: 0;
+}
+
+/* Completely reset all scroll behaviors to let our JS handle it */
+html {
+    scroll-behavior: smooth;
 } 

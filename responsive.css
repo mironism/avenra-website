@@ -58,7 +58,7 @@ body.no-scroll {
     }
     
     h1 {
-        font-size: 36px !important;
+        font-size: 34px !important;
         line-height: 1.2 !important;
         margin-bottom: 20px !important;
     }
@@ -91,6 +91,20 @@ body.no-scroll {
     .hero {
         padding-top: 80px !important; /* Added more padding for fixed header */
         padding-bottom: 30px !important;
+    }
+    /* Force sane wrapping for hero headline on mobile */
+    .hero h1 {
+        /* Keep words intact and avoid hyphenation */
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        hyphens: none !important;
+        /* Constrain measure to encourage clean breaks */
+        max-width: 22ch !important; /* ~22 characters per line */
+        text-wrap: balance; /* progressive enhancement */
+    }
+    /* Put the typed line on its own line for consistent wrapping */
+    #typing-effect-container {
+        display: block !important;
     }
     
     /* Mobile navigation - fixed with semi-transparent background */

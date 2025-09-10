@@ -51,6 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenu.classList.toggle('open');
                 document.body.classList.toggle('no-scroll');
             });
+            // Close menu on any link click (in-page or cross-page)
+            if (mobileLinks && mobileLinks.length) {
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('open');
+                        mobileMenu.classList.remove('open');
+                        document.body.classList.remove('no-scroll');
+                    });
+                });
+            }
         }
         
         // Handle header bar opacity on scroll
@@ -241,8 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize
     setupMobileMenu();
-    setupMobileNav();
-    addMobileStyles();
+    // Disable legacy injected mobile nav to avoid duplication/conflicts
+    // setupMobileNav();
+    // addMobileStyles();
     setupContactForm();
 });
 

@@ -146,18 +146,25 @@ a {
     font-family: var(--font-sans); /* Use sans-serif font */
     height: auto;
     min-height: 120px; /* Add fixed minimum height to prevent layout shifts */
+    /* Ensure words wrap cleanly without mid-word splitting */
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 /* Typing effect container styles */
 #typing-effect-container {
     position: relative;
-    display: inline-block;
-    white-space: nowrap;
+    display: inline; /* allow wrapping with surrounding text */
+    white-space: normal; /* permit wrapping */
 }
 
 #typing-effect-part1, 
 #typing-effect-part2 {
     display: inline;
+    /* Avoid mid-word splits in the animated line */
+    word-break: normal;
+    overflow-wrap: break-word;
 }
 
 #typing-effect-part2 {

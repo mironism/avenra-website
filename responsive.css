@@ -92,6 +92,18 @@ body.no-scroll {
         padding-top: 80px !important; /* Added more padding for fixed header */
         padding-bottom: 30px !important;
     }
+    /* Ensure predictable hero headline wrapping without mid-word breaks */
+    .hero h1 {
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        hyphens: none !important;
+        max-width: 22ch !important; /* encourage clean multi-line layout */
+        text-wrap: balance;
+    }
+    /* Put the typed line on its own line for consistent wrapping */
+    #typing-effect-container {
+        display: block !important;
+    }
     
     /* Mobile navigation - fixed with semi-transparent background */
     .mobile-menu {

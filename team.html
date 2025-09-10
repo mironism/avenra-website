@@ -4,72 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team | Avenra</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20250910a">
+    <link rel="stylesheet" href="responsive.css?v=20250910a">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="favicon.svg">
 </head>
 <body>
-    <div class="sidebar">
-        <nav class="sidebar-nav">
-            <a href="/">Avenra</a>
-            <a href="/team.html" class="active">Team</a>
-            <a href="/portfolio.html">Portfolio</a>
-            <a href="mailto:info@avenra.ai">Contact us</a>
-        </nav>
+    <!-- Fixed header bar for mobile/tablet -->
+    <div class="header-bar"></div>
+    
+    <!-- Mobile navigation -->
+    <div class="mobile-brand">Avenra</div>
+    <button class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="mobile-menu">
+        <a href="index">Avenra</a>
+        <a href="index#business-os">Business OM</a>
+        <a href="index#ai-native-os">Tech-Native OM</a>
+        <a href="index#how-we-work">How We Work</a>
+        <a href="index#capabilities">What We Do</a>
+        <a href="index#who-we-are">Who We Are</a>
+        <a href="index#experiments">Use Cases</a>
+        <a href="index#cta-section">Contact us</a>
+        <div class="lang-switcher">
+            <a href="index" class="lang-link active" lang="en" aria-label="Switch to English">EN</a>
+            <span class="lang-separator">|</span>
+            <a href="de" class="lang-link" lang="de" aria-label="Switch to German">DE</a>
+        </div>
     </div>
 
-    <main class="content">
-        <section class="team-header">
-            <h1>Team</h1>
-            <div class="team-description">
-                <p>Avenra is led by a team of AI experts with a shared passion. We are backed by Swiss investors and partners, along with an international network of advisors.</p>
-                <p>We have offices in Zurich and locations across Europe. Our team members have backgrounds in machine learning, software engineering, design, and business strategy.</p>
-                <p>We strongly believe that a small, focused team with a clear vision can build great things.</p>
-            </div>
-        </section>
-
-        <section class="team-expertise">
-            <h2>Our Expertise</h2>
-            <p>Our team specializes in developing AI solutions that address complex business challenges. With deep expertise in machine learning, natural language processing, computer vision, and data analytics, we create systems that deliver measurable impact.</p>
-            <p>We take pride in our technical excellence and our ability to translate cutting-edge research into practical applications that solve real-world problems.</p>
-        </section>
-
-        <section class="team-approach">
-            <h2>Our Approach</h2>
-            <p>We believe in a collaborative approach to problem-solving. We work closely with our clients to understand their unique challenges and develop tailored solutions that address their specific needs.</p>
-            <p>By combining Swiss precision with innovative thinking, we deliver AI systems that are not only powerful but also reliable, transparent, and aligned with our clients' values and objectives.</p>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-background">
-            <video autoplay muted loop playsinline>
-                <source src="background.mp4" type="video/mp4">
-                <!-- Fallback image if video doesn't load -->
-                <img src="background.png" alt="Footer background">
-            </video>
+    <div class="main-grid">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="index" class="logo">Avenra</a>
+                <a href="index#business-os">Business OM</a>
+                <a href="index#ai-native-os">Tech-Native OM</a>
+                <a href="index#how-we-work">How We Work</a>
+                <a href="index#capabilities">What We Do</a>
+                <a href="index#who-we-are">Who We Are</a>
+                <a href="index#experiments">Use Cases</a>
+                <a href="index#cta-section">Contact us</a>
+                <div class="lang-switcher">
+                    <a href="index" class="lang-link active" lang="en" aria-label="Switch to English">EN</a>
+                    <span class="lang-separator">|</span>
+                    <a href="de" class="lang-link" lang="de" aria-label="Switch to German">DE</a>
+                </div>
+            </nav>
         </div>
-        <div class="footer-wrapper">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/team.html">Team</a>
-                <a href="/portfolio.html">Portfolio</a>
-                <a href="mailto:info@avenra.ai">Contact us</a>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-icon">𝕏</a>
-                <a href="#" class="social-icon">in</a>
+
+        <main class="content">
+            <section class="team-header">
+                <h1>Team</h1>
+                <div class="team-description">
+                    <p>Avenra is led by a team of AI experts with a shared passion. We are backed by Swiss investors and partners, along with an international network of advisors.</p>
+                    <p>We have offices in Zurich and locations across Europe. Our team members have backgrounds in machine learning, software engineering, design, and business strategy.</p>
+                    <p>We strongly believe that a small, focused team with a clear vision can build great things.</p>
+                </div>
+            </section>
+
+            <section class="team-expertise">
+                <h2>Our Expertise</h2>
+                <p>Our team specializes in developing AI solutions that address complex business challenges. With deep expertise in machine learning, natural language processing, computer vision, and data analytics, we create systems that deliver measurable impact.</p>
+                <p>We take pride in our technical excellence and our ability to translate cutting-edge research into practical applications that solve real-world problems.</p>
+            </section>
+
+            <section class="team-approach">
+                <h2>Our Approach</h2>
+                <p>We believe in a collaborative approach to problem-solving. We work closely with our clients to understand their unique challenges and develop tailored solutions that address their specific needs.</p>
+                <p>By combining Swiss precision with innovative thinking, we deliver AI systems that are not only powerful but also reliable, transparent, and aligned with our clients' values and objectives.</p>
+            </section>
+        </main>
+    </div>
+    
+    <div class="clear-fix"></div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">Avenra</div>
+                <div class="footer-copyright">© 2025 Mayor Unlimited AG. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="privacy">Privacy</a>
+                    <a href="terms">Terms</a>
+                    <div class="lang-switcher">
+                        <a href="index" class="lang-link active" lang="en" aria-label="Switch to English">EN</a>
+                        <span class="lang-separator">|</span>
+                        <a href="de" class="lang-link" lang="de" aria-label="Switch to German">DE</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="copyright">Copyright © 2023 Avenra AG. All rights reserved.</div>
-            <div class="legal-links">
-                <a href="/privacy">Privacy</a>
-                <a href="/terms">Terms</a>
-            </div>
-        </div>
-        <a href="#" class="jobs-link">jobs.avenra.ai</a>
     </footer>
-
-    <script src="script.js"></script>
+    
+    <script src="js/anchor.js?v=20250910a"></script>
+    <script src="script.js?v=20250910a"></script>
 </body>
 </html> 

@@ -1,0 +1,758 @@
+/* Responsive styles - Mobile-first approach */
+
+/* General styles across all breakpoints */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Small Mobile (320px - 374px) */
+@media (max-width: 374px) {
+    h1 {
+        font-size: 30px !important;
+    }
+    
+    h2 {
+        font-size: 24px !important;
+    }
+    
+    .hero {
+        padding-top: 70px !important;
+    }
+    
+    .capability-item h3 {
+        font-size: 17px !important;
+    }
+    
+    .capability-item p {
+        font-size: 14px !important;
+    }
+    
+    .footer-copyright {
+        font-size: 12px !important;
+    }
+}
+
+/* Medium Mobile (375px - 424px) */
+@media (max-width: 424px) {
+    .content {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    
+    .mobile-brand {
+        left: 16px;
+    }
+}
+
+/* Base mobile styles (425px - 767px) */
+@media (max-width: 767px) {
+    /* Global layout adjustments */
+    body {
+        overflow-x: hidden;
+    }
+    
+    .main-grid {
+        display: block !important;
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 36px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 20px !important;
+    }
+    
+    h2 {
+        font-size: 28px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
+    }
+    
+    h3 {
+        font-size: 20px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    p {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 16px !important;
+    }
+    
+    /* Container padding - aligned with paragraph edges */
+    .content {
+        padding: 0 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Hero section adjustments */
+    .hero {
+        padding-top: 80px !important; /* Added more padding for fixed header */
+        padding-bottom: 30px !important;
+    }
+    
+    /* Mobile navigation - fixed with semi-transparent background */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        padding: 80px 20px 40px;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s ease;
+        overflow-y: auto;
+    }
+    
+    .mobile-menu.open {
+        display: flex;
+    }
+    
+    .mobile-menu a {
+        font-size: 20px;
+        margin-bottom: 24px;
+        color: rgba(0, 0, 0, 0.7);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: block;
+        padding: 8px 0;
+    }
+    
+    .mobile-menu a:hover, 
+    .mobile-menu a:active {
+        color: rgba(0, 0, 0, 0.9);
+    }
+    
+    /* Header bar with semi-transparent background */
+    .header-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .hamburger {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 1001;
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: rgba(0, 0, 0, 0.8);
+        margin: 6px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.open span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    /* Hide sidebar on mobile */
+    .sidebar {
+        display: none !important;
+    }
+    
+    /* Mobile brand - aligned with paragraph start */
+    .mobile-brand {
+        position: fixed;
+        top: 15px;
+        left: 20px; /* Aligned with content */
+        font-weight: 700;
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.8);
+        z-index: 1001;
+    }
+    
+    /* How We Work section - Vertical stacking with PROPER center alignment */
+    .work-steps {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 40px !important;
+        margin: 30px auto !important; /* Add auto horizontal margins */
+        width: 100% !important;
+        text-align: center !important; /* Center all text inside */
+    }
+    
+    .work-steps::before {
+        display: none !important; /* Remove the vertical line */
+    }
+    
+    .step {
+        padding: 0 !important; /* Remove ALL padding */
+        position: relative !important;
+        margin: 0 auto !important; /* Add auto horizontal margins */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 280px !important; /* Limit width for better mobile layout */
+    }
+    
+    .step-number {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 14px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 auto 15px !important;
+        z-index: 2 !important;
+    }
+    
+    .step h3 {
+        margin: 0 auto !important; /* Center with auto margins */
+        padding: 0 0 12px !important;
+        line-height: 1.3 !important;
+        text-align: center !important; /* Explicitly center text */
+        width: 100% !important;
+        font-weight: 600 !important;
+    }
+    
+    .step p {
+        margin: 0 auto !important; /* Center with auto margins */
+        text-align: center !important; /* Explicitly center text */
+        width: 100% !important;
+        color: rgba(0, 0, 0, 0.6) !important;
+    }
+    
+    /* What We Do section - updated for categories */
+    .category-title {
+        font-size: 20px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .capability-category {
+        margin-bottom: 30px !important;
+    }
+    
+    .capabilities-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1px !important;
+        margin-bottom: 16px !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .capability-item {
+        padding: 20px !important;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .capability-item:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Override any nth-child rules for borders */
+    .capabilities-grid .capability-item:nth-child(5) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .capabilities-grid .capability-item:nth-child(5):last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Commercial grid specific adjustments */
+    .commercial-grid .capability-item:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* What's Not section - Fix alignment */
+    .not-in-scope {
+        margin: 40px 0 20px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .not-in-scope h3 {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .not-in-scope-items {
+        flex-direction: column !important;
+        gap: 12px !important;
+        overflow-x: visible !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .not-item {
+        white-space: normal !important;
+        margin-bottom: 8px !important;
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    /* Who We Are section - Text above values, stacked layout */
+    .manifesto-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+        margin-top: 30px !important;
+    }
+    
+    .manifesto-text {
+        width: 100% !important;
+        flex: none !important; /* Remove flex properties to prevent stretching */
+    }
+    
+    /* Who We Are section - Fix border issues */
+    .values-grid {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        margin: 0 !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        position: relative !important; /* Add positioning context */
+        z-index: 0 !important; /* Set base z-index */
+        background-color: var(--background-color) !important;
+    }
+    
+    .value-item {
+        padding: 20px !important;
+        border: none !important; /* Remove all borders */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; /* Only add bottom border */
+        background-color: var(--background-color) !important;
+        flex: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    .value-item:last-child {
+        border-bottom: none !important; /* Remove bottom border from last item */
+    }
+    
+    /* Ensure no duplicate borders from overlaps */
+    .value-item::before,
+    .value-item::after {
+        display: none !important; /* Remove any pseudo-elements that might add borders */
+    }
+    
+    .value-item h3 {
+        font-size: 18px !important; /* Match capability-item h3 size */
+        margin-bottom: 8px !important; /* Match capability-item spacing */
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+    }
+    
+    .value-item p {
+        font-size: 16px !important; /* Match capability-item p size */
+        color: rgba(0, 0, 0, 0.6) !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
+    }
+    
+    /* Use Cases section */
+    .case-tiles {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        margin: 30px 0 !important;
+    }
+    
+    /* Contact form */
+    .form-group {
+        margin-bottom: 20px !important;
+    }
+    
+    .form-group label {
+        font-size: 15px !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        min-height: 44px !important; /* Minimum touch target size */
+    }
+    
+    .contact-form .btn-primary {
+        width: 100% !important;
+        min-height: 44px !important;
+    }
+    
+    /* Footer - Ensure proper alignment */
+    .footer {
+        margin-top: 60px !important;
+        overflow: hidden !important;
+    }
+    
+    .footer-container {
+        padding: 40px 20px !important;
+        gap: 40px !important;
+    }
+    
+    .footer-bottom {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+        text-align: center !important;
+    }
+    
+    .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 15px !important;
+    }
+    
+    /* Footer language switcher alignment */
+    .footer-legal {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+    
+    .footer-legal a,
+    .footer-legal .lang-switcher {
+        margin: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        height: 20px !important; /* Fixed height for consistent alignment */
+    }
+    
+    .footer-legal .lang-switcher {
+        margin-left: 0 !important;
+        position: relative !important;
+    }
+    
+    /* Section dividers */
+    .section-divider {
+        margin: 30px 0 !important;
+    }
+    
+    /* Prevent horizontal overflow */
+    .hero, .feature, .cta-section, .footer {
+        overflow-x: hidden !important;
+    }
+    
+    /* Ensure spacing between section elements */
+    .feature {
+        padding: 30px 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* CTA section */
+    .cta-section {
+        margin: 30px 0 !important;
+        padding: 30px 0 !important;
+    }
+    
+    .cta-content {
+        max-width: 100% !important;
+    }
+    
+    .cta-content h2 {
+        font-size: 26px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .cta-content p {
+        margin-bottom: 30px !important;
+    }
+    
+    /* CTA contact line fix */
+    .contact-alternative {
+        margin-top: 30px !important;
+        padding-top: 20px !important;
+    }
+    
+    .contact-alternative p {
+        display: inline !important;
+        margin-right: 8px !important;
+    }
+    
+    .contact-alternative .btn-secondary {
+        display: inline !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Mobile section and anchor adjustments */
+    .feature-number {
+        display: inline-block;
+        padding-top: 0;
+        margin-top: 0;
+        font-size: 18px !important;
+    }
+    
+    /* Pain point bullet fixes for mobile */
+    .pain-point-bullet {
+        color: var(--swiss-green) !important;
+    }
+    
+    .pain-point-bullet::before {
+        content: "●";
+        color: var(--swiss-green) !important;
+        display: inline-block !important;
+    }
+    
+    /* Reset all explicit scroll-margin properties */
+    #business-os,
+    #ai-native-os,
+    #how-we-work,
+    #capabilities,
+    #who-we-are,
+    #experiments,
+    #cta-section,
+    section[id] {
+        scroll-margin-top: 0 !important;
+    }
+    
+    /* Remove any ::before elements that might be causing issues */
+    section[id]::before,
+    div[id]::before {
+        display: none !important;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Header bar for tablets */
+    .header-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Show hamburger on tablets */
+    .hamburger {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 1001;
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: rgba(0, 0, 0, 0.8);
+        margin: 6px 0;
+        transition: all 0.3s ease;
+    }
+    
+    /* Mobile brand for tablets */
+    .mobile-brand {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        font-weight: 700;
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.8);
+        z-index: 1001;
+    }
+    
+    /* Mobile menu for tablets */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        padding: 80px 20px 40px;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s ease;
+        overflow-y: auto;
+    }
+    
+    .mobile-menu.open {
+        display: flex;
+    }
+    
+    .mobile-menu a {
+        font-size: 20px;
+        margin-bottom: 24px;
+        color: rgba(0, 0, 0, 0.7);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    
+    .mobile-menu a:hover, 
+    .mobile-menu a:active {
+        color: rgba(0, 0, 0, 0.9);
+    }
+    
+    /* Hide sidebar on tablets */
+    .sidebar {
+        display: none !important;
+    }
+    
+    /* Content padding for tablets */
+    .content {
+        grid-column: 1 / -1 !important;
+        padding: 0 40px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Hero section adjustments for tablets */
+    .hero {
+        padding-top: 100px !important;
+        padding-bottom: 40px !important;
+    }
+    
+    /* Features grid for tablets */
+    .capabilities-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    /* Case tiles for tablets */
+    .case-tiles {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    /* Who We Are section for tablets */
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    /* How We Work steps for tablets */
+    .work-steps {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 40px 20px !important;
+    }
+    
+    .work-steps::before {
+        display: none;
+    }
+    
+    /* Adjust heading sizes for tablets */
+    h1 {
+        font-size: 42px !important;
+    }
+    
+    h2 {
+        font-size: 30px !important;
+    }
+}
+
+/* Laptop and larger (1024px and up) */
+@media (min-width: 1024px) {
+    /* Hide mobile elements on desktop */
+    .hamburger, .mobile-brand, .mobile-menu, .header-bar {
+        display: none !important;
+    }
+}
+
+/* Who We Are Section Responsive */
+@media (max-width: 992px) and (min-width: 768px) {
+    .manifesto-layout {
+        flex-direction: column;
+        gap: 30px; /* Reduced from 40px */
+    }
+    
+    .manifesto-text, .values-grid {
+        width: 100%;
+    }
+    
+    /* Keep values-grid as a vertical stack on tablet */
+    .values-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Reduced from 16px for tighter mobile spacing */
+        max-width: 600px; /* Prevent cards from getting too wide on tablet */
+        margin: 0 auto;
+    }
+}
+
+/* Remove these overrides for mobile */
+@media (max-width: 767px) {
+    /* We already have better mobile styles in the main mobile section */
+    /* This prevents conflicts with the better styles above */
+}
+
+/* Pain Points List - fix alignment */
+@media (max-width: 767px) {
+    .pain-point-item {
+        display: flex !important;
+        align-items: center !important; /* Center align the dot with text */
+        margin-bottom: 12px !important;
+    }
+    
+    .pain-point-bullet {
+        color: rgba(0, 0, 0, 0.6) !important;
+        margin-right: 12px !important;
+        font-size: 14px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 18px !important;
+        flex-shrink: 0 !important; /* Prevent the bullet from shrinking */
+    }
+    
+    .pain-point-item p {
+        margin: 0 !important;
+        flex: 1 !important;
+    }
+} 

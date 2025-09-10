@@ -137,8 +137,9 @@ a {
     font-size: clamp(28px, 6vw, 48px);
     font-weight: 700;
     line-height: 1.12;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    /* Keep words intact; only break when absolutely necessary */
+    overflow-wrap: break-word;
+    word-break: normal;
     hyphens: auto;
 }
 
@@ -153,8 +154,10 @@ a {
 #typing-effect-part2 {
     display: inline;
     line-height: 1.12;
-    word-break: break-word;
-    overflow-wrap: anywhere;
+    /* Avoid mid-word splits in the animated line */
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 #typing-effect-part2 {
